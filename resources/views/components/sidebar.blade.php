@@ -5,6 +5,7 @@
 
     $user = Auth::user();
     $isAdmin = $user && $user->role->name === 'admin';
+    $isInstructor = $user && $user->role->name === 'instructor';
 @endphp
 
 <div class="bg-gray-100 h-full w-72 fixed top-0 left-0">
@@ -63,6 +64,7 @@
                     <span>Programs</span>
                 </a>
             </li>
+            @if ($isAdmin)
             <li class="my-2">
                 <a href="{{ route('courses.index') }}"
                     class="flex items-center px-4 py-2 rounded-md hover:bg-gray-300 {{ Route::currentRouteName() == 'courses.index' ? 'bg-gray-300' : '' }}">
@@ -74,6 +76,7 @@
                     <span>Courses</span>
                 </a>
             </li>
+            @endif
             <li class="my-2">
                 <a href="{{ route('sections.index') }}"
                     class="flex items-center px-4 py-2 rounded-md hover:bg-gray-300 {{ Route::currentRouteName() == 'sections.index' ? 'bg-gray-300' : '' }}">
@@ -82,7 +85,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
                     </svg>
-                    <span>Sections</span>
+                    <span>Schedules</span>
                 </a>
             </li>
             <li class="my-2">
@@ -96,7 +99,7 @@
                     <span>Logbook</span>
                 </a>
             </li>
-
+            @if ($isAdmin)
             <li class="my-2">
                 <a href="{{ route('schedules.index') }}"
                     class="flex items-center px-4 py-2 rounded-md hover:bg-gray-300 {{ Route::currentRouteName() == 'schedules' ? 'bg-gray-300' : '' }}">
@@ -105,11 +108,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                     </svg>
-                    <span>Schedules</span>
+                    <span>Instructor Logs</span>
                 </a>
             </li>
 
-            @if ($isAdmin)
+            
                 <li class="my-2">
                     <a href="{{ route('kits.index') }}"
                         class="flex items-center px-4 py-2 rounded-md hover:bg-gray-300 {{ Route::currentRouteName() == 'kits.index' ? 'bg-gray-300' : '' }}">

@@ -32,7 +32,7 @@ class Section extends Model
 
     public function students(): HasMany
     {
-        return $this->hasMany(Student::class, 'section_id');
+        return $this->hasMany(Student::class, 'section_id', 'section_name');
     }
 
     public function creator(): BelongsTo

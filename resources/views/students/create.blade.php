@@ -57,19 +57,34 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="section_id" class="block text-sm font-medium text-gray-700">Section</label>
-                    <select id="section_id" name="section_id"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        @foreach ($sections as $section)
-                            <option value="{{ $section->id }}"
-                                {{ old('section_id') == $section->id ? 'selected' : '' }}>
-                                {{ $section->section_name }}</option>
-                        @endforeach
-                    </select>
-                    @error('section_id')
-                        <p class="text-red-700 text-sm">{{ $message }}</p>
-                    @enderror
-                </div>
+    <label for="year" class="block text-sm font-medium text-gray-700">Year</label>
+    <select id="year" name="year"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        <option value="" disabled selected>Select Year</option>
+        @for ($i = 1; $i <= 4; $i++)
+            <option value="{{ $i }}" {{ old('year') == $i ? 'selected' : '' }}>{{ $i }}</option>
+        @endfor
+    </select>
+    @error('year')
+        <p class="text-red-700 text-sm">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mt-4">
+    <label for="section" class="block text-sm font-medium text-gray-700">Section</label>
+    <select id="section" name="section"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        <option value="" disabled selected>Select Section</option>
+        @foreach (range('A', 'H') as $section)
+            <option value="{{ $section }}" {{ old('section') == $section ? 'selected' : '' }}>{{ $section }}</option>
+        @endforeach
+    </select>
+    @error('section')
+        <p class="text-red-700 text-sm">{{ $message }}</p>
+    @enderror
+</div>
+
+<input type="hidden" id="section_id" name="section_id" value="{{ old('section_id') }}">
                 <div>
                     <button type="submit"
                         class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -97,4 +112,15 @@
 
     </div>
     <script src="{{ asset('js/characterCount.js') }}" defer></script>
+    <script>
+        document.getElementById('year').addEventListener('change', updateSectionId);
+        document.getElementById('section').addEventListener('change', updateSectionId);
+
+        function updateSectionId() {
+            const year = document.getElementById('year').value;
+            const section = document.getElementById('section').value;
+            const sectionId = year && section ? year + section : '';
+            document.getElementById('section_id').value = sectionId;
+        }
+    </script>
 </x-layout>

@@ -22,7 +22,6 @@
         </div>
     </div>
 
-    {{-- You can add a search function here if needed. It's already in the controller. --}}
     <div class="w-full flex justify-between gap-5 mb-4">
         <div class="bg-gray-100 w-1/2 min-h-96 rounded-lg border-blue-600 border mt-4">
             <table class="min-w-full mt-4">

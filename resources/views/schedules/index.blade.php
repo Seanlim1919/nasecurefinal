@@ -10,7 +10,7 @@
     <div class="container mx-auto p-5 bg-gray-200 rounded-3xl">
         <div class="items-center mb-3">
             <h1 class="text-xl font-bold ps-4 mb-4">Schedules</h1>
-            <p class="text-sm ps-8">Manage the schedules of instructors here.</p>
+            <p class="text-sm ps-8">Schedule logs of instructors.</p>
         </div>
 
         <div class="flex justify-end">
@@ -68,8 +68,12 @@
                                 </td>
                             @endif
                             <td class="py-2 px-7 border-b text-center">{{ $schedule->day }}</td>
-                            <td class="py-2 px-7 border-b text-center">{{ $schedule->time_in->format('g:i A') }}</td>
-                            <td class="py-2 px-7 border-b text-center">{{ $schedule->time_out->format('g:i A') }}</td>
+                            <td class="py-2 px-7 border-b text-center">
+                                {{ $schedule->time_in ? $schedule->time_in->format('g:i A') : 'N/A' }}
+                            </td>
+                            <td class="py-2 px-7 border-b text-center">
+                                {{ $schedule->time_out ? $schedule->time_out->format('g:i A') : 'N/A' }}
+                            </td>
                             @if (Auth::user()->role->name === 'instructor')
                                 <td class="py-2 px-7 border-b flex justify-center w-40">
                                     <a href="{{ route('schedules.edit', $schedule->id) }}"

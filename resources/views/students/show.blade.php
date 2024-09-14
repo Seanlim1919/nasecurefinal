@@ -21,13 +21,15 @@
                 <div class="space-y-4">
                     <div class="p-4 rounded-lg border border-gray-200">
                         <p class="text-sm text-gray-600 font-semibold">RFID</p>
-                        <p class="text-lg font-medium text-gray-800">{{ $student->rfid }}</p>
+                        <p class="text-lg font-medium text-gray-800">{{ $student->rfid ?? 'Not Available' }}</p>
                     </div>
                     <div class="p-4 rounded-lg border border-gray-200">
                         <p class="text-sm text-gray-600 font-semibold">Section</p>
                         <p class="text-lg font-medium text-gray-800">
-                            {{ $student->section ? $student->section->section_name : 'Not Set' }}</p>
+                            {{ $student->section_id ?? 'Not Assigned' }}
+                        </p>
                     </div>
+
                 </div>
             </div>
 
@@ -49,10 +51,10 @@
                                     <td class="py-3 px-6 text-left whitespace-nowrap">
                                         {{ $log->attendance_date->format('Y-m-d') }}</td>
                                     <td class="py-3 px-6 text-left">
-                                        {{ optional($log->time_in)->format('H:i:s') ?? '' }}
+                                        {{ optional($log->time_in)->format('H:i:s') ?? 'N/A' }}
                                     </td>
                                     <td class="py-3 px-6 text-left">
-                                        {{ optional($log->time_out)->format('H:i:s') ?? '' }}
+                                        {{ optional($log->time_out)->format('H:i:s') ?? 'N/A' }}
                                     </td>
                                 </tr>
                             @empty

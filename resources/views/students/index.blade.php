@@ -88,7 +88,7 @@
                             <td class="py-2 px-4 text-center border-b">{{ $student->email ?? 'Not Set' }}</td>
                             <td class="py-2 px-4 text-center border-b">{{ obscureString($student->rfid ?? '') }}</td>
                             <td class="py-2 px-4 text-center border-b">
-                                {{ $student->section->section_name ?? 'Not Set' }}
+                                {{ $student->section_id ?? 'Not Set' }}
                             </td>
                             <td class="py-2 px-4 text-center border-b flex justify-center gap-2">
                                 <a href="{{ route('students.edit', $student->id) }}"

@@ -19,10 +19,10 @@ class Student extends Model
         'section_id',
         'created_by',
     ];
-
     public function section(): BelongsTo
     {
-        return $this->belongsTo(Section::class, 'section_id');
+        // This remains the same, it refers to the section_name field in the Section model
+        return $this->belongsTo(Section::class, 'section_id', 'section_name');
     }
 
     public function attendanceLogs(): HasMany

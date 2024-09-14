@@ -13,6 +13,7 @@
             <p class="text-sm ps-8">Progam should be the first thing to add, in order to manage also the courses</p>
         </div>
         <div class="flex justify-end">
+            @if (Auth::user()->role->name === 'admin')
 
             <a href="{{ route('programs.create') }}"
                 class="ml-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-600 flex items-center focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
@@ -23,6 +24,7 @@
                 </svg>
                 Add Program
             </a>
+            @endif
         </div>
         <div class="w-full mt-6">
             <form method="GET" action="{{ route('programs.index') }}" class="flex items-center">
@@ -53,6 +55,7 @@
                         <tr class="hover:bg-blue-50">
                             <td class="py-2 px-7 border-b text-center">{{ $program->program_name }}</td>
                             <td class="py-2 px-7 border-b flex justify-center w-40">
+                            @if (Auth::user()->role->name === 'admin')
                                 <a href="{{ route('programs.edit', $program->id) }}"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
                                     Edit
@@ -60,15 +63,19 @@
                                 <form action="{{ route('programs.destroy', $program->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
+                                    
+
                                     <button type="submit"
                                         class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
                                         onclick="return confirm('Are you sure you want to delete this student?');">
                                         Delete
                                     </button>
+                                    @endif
                                 </form>
                             </td>
                         </tr>
                     @endforeach
+                    
                 </tbody>
             </table>
         </div>
